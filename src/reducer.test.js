@@ -1,5 +1,5 @@
 import tasks from "../fixtures/tasks";
-import { setTasks } from "./actions";
+import { setTasks, deleteTask } from "./actions";
 import reducer from "./reducer";
 
 describe("reducer", () => {
@@ -12,6 +12,18 @@ describe("reducer", () => {
         setTasks(tasks)
       );
       expect(state.tasks).not.toHaveLength(0);
+    });
+  });
+
+  describe("deleteTask", () => {
+    it("removes the task from tasks", () => {
+      const state = reducer(
+        {
+          tasks: [{ id: 0, title: "아무 일도 하기 싫다" }],
+        },
+        deleteTask(0)
+      );
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });

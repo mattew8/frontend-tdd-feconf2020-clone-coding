@@ -1,11 +1,18 @@
 import React from "react";
 import List from "./List";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTask } from "./actions";
 
 export default function ListContainer() {
   const { tasks } = useSelector((state) => ({
     tasks: state.tasks,
   }));
 
-  return <List tasks={tasks} />;
+  const dispatch = useDispatch();
+
+  function handleClick(id) {
+    dispatch(deleteTask(id));
+  }
+
+  return <List tasks={tasks} onClick={handleClick} />;
 }
